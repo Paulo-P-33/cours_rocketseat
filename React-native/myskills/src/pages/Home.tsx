@@ -18,7 +18,15 @@ export function Home() {
             id: String(new Date().getTime()),
             name: newSkill
         }
+        {console.log("add skill")}
         setMySkills([...mySkills, data]);
+    }
+
+    function handleRemoveNewSkill(id: string) {
+        {console.log("removi skill")}
+        setMySkills(oldState => oldState.filter(
+            skill => skill.id !== id
+        ));
     }
     
     useEffect(() => {
@@ -60,7 +68,7 @@ export function Home() {
                 keyExtractor={(item) => item.id}
                 renderItem={({ item }) => {
                     return (
-                        <SkillCard skill={item.name}/>
+                        <SkillCard skill={item.name} onPress={() => handleRemoveNewSkill(item.id)}/>
                     )
                 }}
             />  
