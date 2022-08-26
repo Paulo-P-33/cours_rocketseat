@@ -28,7 +28,6 @@ export function Home() {
 
     foundItem.done = !foundItem.done;
     setTasks(updatedTasks);
-    console.log(updatedTasks);
   }
 
   function handleRemoveTask(id: number) {
