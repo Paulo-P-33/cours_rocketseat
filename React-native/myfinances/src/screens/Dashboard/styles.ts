@@ -1,4 +1,5 @@
 import Styled from 'styled-components/native';
+import {Feather} from '@expo/vector-icons';
 import { RFPercentage, RFValue } from 'react-native-responsive-fontsize';
 
 export const Container = Styled.View`
@@ -19,6 +20,10 @@ export const UserWrapper = Styled.View`
     width: 100%;
 
     padding: 0 24px;
+
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
 `;
 
 export const UserInfo = Styled.View`
@@ -49,4 +54,9 @@ export const UserName = Styled.Text`
 
     font-size: ${RFValue(18)}px;
     font-family: ${({theme}) => theme.fonts.bold};
+`;
+
+export const Icon = Styled(Feather)`
+    color: ${({theme}) => theme.colors.secondary};
+    font-size: ${RFValue(24)}px;
 `;
