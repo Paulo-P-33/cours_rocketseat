@@ -60,3 +60,14 @@ export const Icon = Styled(Feather)`
     color: ${({theme}) => theme.colors.secondary};
     font-size: ${RFValue(24)}px;
 `;
+
+export const HighlightCards = Styled.ScrollView.attrs({
+    horizontal: true ,
+    showsHorizontalScrollIndicator: false,
+    contentContainerStyle: { paddingHorizontal: 24 }
+})`
+    width: 100%;
+
+    position: absolute;
+    margin-top: ${RFPercentage(30)}px;
+`;
