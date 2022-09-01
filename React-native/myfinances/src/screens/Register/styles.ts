@@ -39,4 +39,7 @@ export const Fields = Styled.View``;
 export const TransactionsTypes = Styled.View`
     flex-direction: row;
     justify-content: space-between;
+
+    margin-top: ${RFValue(8)}px;
+    margin-bottom: ${RFValue(16)}px;
 `;
