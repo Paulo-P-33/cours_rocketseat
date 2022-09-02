@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import {Modal} from 'react-native';
+
 import { Button } from '../../components/Form/Button';
-import { CategorySelect } from '../../components/Form/CategorySelect';
+import { CategorySelectButton } from '../../components/Form/CategorySelectButton';
 import { Input } from '../../components/Form/Input';
 import { TranscationTypeButton } from '../../components/Form/TransactionTypeButton';
 import { 
@@ -52,7 +54,7 @@ export function Register(){
                     />
                 </TransactionsTypes>
 
-                <CategorySelect title='Categoria'/>
+                <CategorySelectButton title='Categoria'/>
             </Fields>
 
             <Button title='Enviar'/>
