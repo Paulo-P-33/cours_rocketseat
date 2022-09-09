@@ -5,6 +5,18 @@
     "version": "1.0.0",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "icon": "./assets/icon.png",
+    "splash": {
+        "image": "./assets/splash.png",
+        "resizeMode": "cover",
+        "backgroundColor": "#FF914D"
+      },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage":  "./assets/adaptive-icon.png",
+        "backgroundColor": "#FF914D"
+      }
+    }
+    }
   }
-}
