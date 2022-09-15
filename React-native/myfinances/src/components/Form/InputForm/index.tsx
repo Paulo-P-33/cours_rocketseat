@@ -27,6 +27,7 @@ export function InputForm({
                 render={({ field: { onChange, onBlur, value}}) => (
                     <Input 
                     onChangeText={onChange}
+                    value={value}
                         {...rest}
                     />
                 )}

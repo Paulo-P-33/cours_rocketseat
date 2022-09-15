@@ -1,19 +1,24 @@
 import { NavigationContainer } from '@react-navigation/native';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AppIntoSlider from 'react-native-app-intro-slider';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import * as SplashScreen from 'expo-splash-screen';
 
 import { AppRoutes } from '../../routes/app.routes';
 import { SlideProps, slides } from '../../utils/onboardingData';
 import { Container, Description, Header, Title, Body, Button } from './styles';
 
 import theme from '../../global/styles/theme';
+import { boolean } from 'yup';
+import App from '../../../App';
 
+const dataKey = '@myfinances:onboarding';
 
+SplashScreen.preventAutoHideAsync();
 
 export function Onboarding(){
-    const [showSlide, setShowSlide] = useState(false);
-
+    const [showOnboarding, setShowOnboarding] = useState(false);
+    
     function renderSlides({item}: SlideProps){
         return(
             <Container>
@@ -29,13 +34,19 @@ export function Onboarding(){
         )
     }
 
-    if(showSlide){
+    async function activeOnboarding (active: boolean){
+        await AsyncStorage.setItem(dataKey, JSON.stringify(active));
+    }
+    
+    if(showOnboarding){
         return(
-             <NavigationContainer>
+            <NavigationContainer>
                 <AppRoutes/>
             </NavigationContainer> 
         )
     }
+    
+    SplashScreen.hideAsync();
     return(
         <AppIntoSlider
             data={slides}
@@ -52,12 +63,14 @@ export function Onboarding(){
             renderSkipButton={() => <Button typeButton={'Pular'}>Pular</Button>}
             renderDoneButton={() => <Button typeButton={'Feito'}>Feito!</Button>}
             onDone={() => {
-                setShowSlide(true)
+                activeOnboarding(true);
+                setShowOnboarding(true);
                 return(
-                    <AppRoutes/>
+                    <NavigationContainer>
+                        <AppRoutes/>
+                    </NavigationContainer> 
                 )
             }}
         />
-        
     )
 }
