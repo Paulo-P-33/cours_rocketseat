@@ -17,36 +17,46 @@ SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   const [fontsLoeaded] = useFonts({Poppins_400Regular, Poppins_500Medium, Poppins_700Bold});
-  const [viewOnboarding, setViewOnboarding] = useState(false);
+  const [noActiveOnboarding, setNoActiveOnboarding] = useState(false);
   const [appIsReady, setAppIsReady] = useState(false);
   
   
   useEffect(() => {
     async function loadOnboarding(){
-      const statusOnboarding = await AsyncStorage.getItem(dataKey!);
-      const activeOnboarding = JSON.parse(statusOnboarding!)
-      setViewOnboarding(activeOnboarding);
+      try {
+        const statusOnboarding = await AsyncStorage.getItem(dataKey!);
+        const attActiveOnboarding = JSON.parse(statusOnboarding!)
+        setNoActiveOnboarding(attActiveOnboarding);
+      } catch (error) {
+        console.log(error)
+      } finally {
+        setAppIsReady(true)
+      }
     }
-    
     loadOnboarding();
   },[]);
 
-  SplashScreen.hideAsync();
-  
-  if(!fontsLoeaded){
+  const onLayoutRootView = useCallback(async () => {
+    if (appIsReady) {
+      await SplashScreen.hideAsync();
+    }
+  }, [appIsReady]);
+
+
+  if(!fontsLoeaded || !appIsReady){
     return null;
   }
-  
-  if(!viewOnboarding){
+
+  if(!noActiveOnboarding){
     return (
       <ThemeProvider theme={theme} >
         <Onboarding />
       </ThemeProvider>
-    )
+    ) 
   }
   return (
     <ThemeProvider theme={theme}>
-      <NavigationContainer>
+      <NavigationContainer onReady={onLayoutRootView}>
           <AppRoutes/>
       </NavigationContainer>
     </ThemeProvider>
