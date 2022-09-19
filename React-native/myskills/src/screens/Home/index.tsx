@@ -1,7 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TextInput, FlatList} from 'react-native';
-import { Button } from './components/Button';
-import { SkillCard } from './components/SkillCard';
+import { FlatList } from 'react-native';
+import { Button } from '../../components/Button';
+import { SkillCard } from '../../components/SkillCard';
+import { 
+    Container,
+    Title,
+    InputField,
+    Greeting
+} from './styles';
 
 interface SkillData {
     id: string;
@@ -43,15 +49,14 @@ export function Home() {
     }, [])
 
     return (
-        <View style={styles.container}>
-            <Text style={styles.title}>Welcome, Luiz Paulo</Text>
+        <Container>
+            <Title>Welcome, Luiz Paulo</Title>
             
-            <Text style={styles.greeting}>
+            <Greeting>
                 {greeting}
-            </Text>
+            </Greeting>
 
-            <TextInput 
-                style={styles.input}
+            <InputField
                 placeholder="New Skill"
                 placeholderTextColor='#555'
                 onChangeText={setNewSkill}
@@ -59,9 +64,9 @@ export function Home() {
             
            <Button onPress={handleAddNewSkill} title="add"/>
             
-            <Text style={[styles.title, {marginVertical: 50}]}>
+            <Title style={[{marginVertical: 50}]}>
                 My Skills
-            </Text>
+            </Title>
 
             <FlatList
                 data={mySkills}
@@ -73,31 +78,6 @@ export function Home() {
                 }}
             />  
                 
-        </View>
+        </Container>
   );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        backgroundColor: '#121015',   
-        paddingHorizontal: 30,
-        paddingVertical: 70,
-    },
-    title: {
-        color: '#FFFFFF',
-        fontSize: 24,
-        fontWeight: 'bold'
-    },
-    input: {
-        backgroundColor: '#1F1E25',
-        color: '#FFFFFF',
-        fontSize: 18,
-        padding: 15,
-        marginTop: 30,
-        borderRadius: 7
-    },
-    greeting: {
-        color: '#FFFFFF'
-    }
-})
