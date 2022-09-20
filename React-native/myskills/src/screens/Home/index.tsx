@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { FlatList } from 'react-native';
-import { Button } from '../../components/Button';
+import { Button } from '../../components/Form/Button';
 import { SkillCard } from '../../components/SkillCard';
 import { 
     Container,
